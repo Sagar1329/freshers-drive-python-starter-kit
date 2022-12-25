@@ -36,7 +36,7 @@ def Add_item(itemName, quantity):
             return
         else:
             total_bill = total_bill+bill(itemName, quantity)
-            output = "Item Added"
+            output = "ITEM_ADDED"
             print(output)
     elif (itemName in category['Stationery']):
         if (quantity > 3):
@@ -44,7 +44,7 @@ def Add_item(itemName, quantity):
             return
         else:
             total_bill = total_bill+bill(itemName, quantity)
-            output = "Item Added"
+            output = "ITEM_ADDED"
             print(output)
     else:
         print('Item does not exist')
@@ -70,23 +70,26 @@ def applyDiscount(items):
 def print_bill():
     global total_bill
     ExtraDiscount = 0
-
+    Discount = 0
     if (total_bill >= 3000):
         Discount = applyDiscount(items)
         total_bill -= Discount
         ExtraDiscount = ((5/100)*total_bill)
         total_bill -= ExtraDiscount
-        print('Discount applied', Discount)
-        print('Exta Discount applied', ExtraDiscount)
+        Discount += ExtraDiscount
+        print('TOTAL_DISCOUNT %.2f' % Discount)
+
     elif (total_bill >= 1000):
         Discount = applyDiscount(items)
         total_bill -= Discount
-        print('Discount applied', Discount)
+        print('TOTAL_DISCOUNT %.2f' % Discount)
 
     tax = 0.1*total_bill
     total_bill += tax
+    if (Discount == 0):
+        print('TOTAL_DISCOUNT %.2f' % Discount)
 
-    print("Total amount to be paid", total_bill)
+    print("TOTAL_AMOUNT_TO_PAY %.2f" % total_bill)
 
 
 total_bill = 0
